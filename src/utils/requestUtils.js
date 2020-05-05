@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 export const fetchWithApiHeader = url =>
   fetch(url, {
     headers: {
