@@ -10,7 +10,9 @@
         </h4>
       </header>
       <main>
-        <router-view />
+        <transition name="fade">
+          <router-view />
+        </transition>
       </main>
     </div>
   </div>
@@ -63,5 +65,14 @@ export default {};
   .content-wrapper {
     width: 100%;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
