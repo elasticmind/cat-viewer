@@ -38,8 +38,20 @@ export default new Vuex.Store({
           }
         })
       ).json();
+      const image = await (
+        await fetch(
+          `https://api.thecatapi.com/v1/images/search?breed_id=${id}`,
+          {
+            headers: {
+              "x-api-key": process.env.X_API_KEY
+            }
+          }
+        )
+      ).json();
 
-      commit("setCat", cat.length ? cat[0] : {});
+      console.log(cat, image);
+
+      commit("setCat", cat.length ? { ...cat[0], image: image[0].url } : {});
     }
   }
 });

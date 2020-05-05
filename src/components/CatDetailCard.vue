@@ -1,19 +1,19 @@
 <template functional>
   <div>
-    <img :src="props.cat.image" :alt="props.cat.name" />
+    <img :src="props.cat.image" :alt="props.cat.name" class="image" />
     <h1 class="name">{{ props.cat.name }}</h1>
     <h3 class="heading">Description</h3>
     <p>{{ props.cat.description }}</p>
     <h3 class="heading">Detailed information</h3>
-    <p>
+    <p class="detail">
       <span class="detail-label">Weight:</span>
       <span>&nbsp;{{ props.cat.weight.metric }}&nbsp;kg</span>
     </p>
-    <p>
+    <p class="detail">
       <span class="detail-label">Life span:</span>
       <span>&nbsp;{{ props.cat.life_span }}&nbsp;years</span>
     </p>
-    <p>
+    <p class="detail">
       <span class="detail-label">Temperament:</span>
       <span>&nbsp;{{ props.cat.temperament }}</span>
     </p>
@@ -25,6 +25,12 @@
 </template>
 
 <style lang="scss" scoped>
+.image {
+  display: block;
+  width: 80%;
+  margin: 0 auto 40px;
+}
+
 .name {
   margin-bottom: 20px;
   text-align: center;
@@ -32,6 +38,10 @@
 
 .heading {
   margin: 30px 0 10px;
+}
+
+.detail {
+  margin-bottom: 10px;
 }
 
 .detail-label {
