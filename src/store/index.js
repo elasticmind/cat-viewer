@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { fetchWithApiHeader } from "../utils/requestUtils";
+import * as mutationTypes from "./mutationTypes";
+import * as actionTypes from "./actionTypes";
 
 require("dotenv").config();
 
@@ -12,22 +14,22 @@ export default new Vuex.Store({
     cat: null
   },
   mutations: {
-    setCats(state, cats) {
+    [mutationTypes.SET_CATS](state, cats) {
       state.cats = cats;
     },
-    setCat(state, cat) {
+    [mutationTypes.SET_CAT](state, cat) {
       state.cat = cat;
     }
   },
   actions: {
-    async fetchCats({ commit }) {
+    [actionTypes.FETCH_CATS]: async function({ commit }) {
       const cats = await fetchWithApiHeader(
         "https://api.thecatapi.com/v1/breeds"
       );
 
-      commit("setCats", cats);
+      commit(mutationTypes.SET_CATS, cats);
     },
-    async fetchCat({ commit }, id) {
+    [actionTypes.FETCH_CAT]: async function({ commit }, id) {
       const [cat, image] = await Promise.all([
         fetchWithApiHeader(
           `https://api.thecatapi.com/v1/breeds/search?q=${id}`
@@ -37,7 +39,10 @@ export default new Vuex.Store({
         )
       ]);
 
-      commit("setCat", cat.length ? { ...cat[0], image: image[0].url } : {});
+      commit(
+        mutationTypes.SET_CAT,
+        cat.length ? { ...cat[0], image: image[0].url } : {}
+      );
     }
   }
 });

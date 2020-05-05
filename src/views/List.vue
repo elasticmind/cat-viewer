@@ -21,13 +21,14 @@
 
 <script>
 import { mapState } from "vuex";
+import { FETCH_CATS } from "@/store/actionTypes";
 
 export default {
   computed: {
     ...mapState(["cats"])
   },
   mounted() {
-    this.$store.dispatch("fetchCats");
+    this.$store.dispatch(FETCH_CATS);
   }
 };
 </script>

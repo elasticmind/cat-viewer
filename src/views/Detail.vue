@@ -22,6 +22,8 @@
 <script>
 import { mapState } from "vuex";
 import CatDetailCard from "@/components/CatDetailCard";
+import { FETCH_CAT } from "@/store/actionTypes";
+import { SET_CAT } from "@/store/mutationTypes";
 
 export default {
   components: {
@@ -34,7 +36,10 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("fetchCat", this.$route.params.id);
+    this.$store.dispatch(FETCH_CAT, this.$route.params.id);
+  },
+  destroyed() {
+    this.$store.commit(SET_CAT, null);
   }
 };
 </script>
