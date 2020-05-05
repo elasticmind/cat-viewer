@@ -1,5 +1,5 @@
 <template functional>
-  <div>
+  <div class="wrapper">
     <img :src="props.cat.image" :alt="props.cat.name" class="image" />
     <h1 class="name">{{ props.cat.name }}</h1>
     <h3 class="heading">Description</h3>
@@ -25,6 +25,10 @@
 </template>
 
 <style lang="scss" scoped>
+.wrapper {
+  text-align: left;
+}
+
 .image {
   display: block;
   width: 80%;
@@ -49,7 +53,7 @@
 }
 
 .further-info-text {
-  margin: 100px 0;
+  margin-top: 50px;
   text-align: center;
 
   a {

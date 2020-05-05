@@ -48,6 +48,7 @@ export default {};
 .header {
   display: inline-block;
   margin: 40px 0;
+  padding: 0 20px;
 }
 
 .content-wrapper {
@@ -56,5 +57,11 @@ export default {};
   padding-bottom: 40px;
   background-color: var(--color-light);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 600px) {
+  .content-wrapper {
+    width: 100%;
+  }
 }
 </style>

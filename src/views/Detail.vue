@@ -42,13 +42,12 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   padding: 0 40px;
-  text-align: left;
 }
 
 .back {
   background-color: var(--color-primary);
   padding: 20px;
-  margin: auto;
+  margin: 100px auto 0;
   color: var(--color-gray-light);
   text-decoration: none;
   font-weight: bold;
