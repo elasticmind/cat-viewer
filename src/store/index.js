@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { fetchWithApiHeader } from "../utils/requestUtils";
 
 require("dotenv").config();
 
@@ -20,36 +21,21 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchCats({ commit }) {
-      const cats = await (
-        await fetch("https://api.thecatapi.com/v1/breeds", {
-          headers: {
-            "x-api-key": process.env.X_API_KEY
-          }
-        })
-      ).json();
+      const cats = await fetchWithApiHeader(
+        "https://api.thecatapi.com/v1/breeds"
+      );
 
       commit("setCats", cats);
     },
     async fetchCat({ commit }, id) {
-      const cat = await (
-        await fetch(`https://api.thecatapi.com/v1/breeds/search?q=${id}`, {
-          headers: {
-            "x-api-key": process.env.X_API_KEY
-          }
-        })
-      ).json();
-      const image = await (
-        await fetch(
-          `https://api.thecatapi.com/v1/images/search?breed_id=${id}`,
-          {
-            headers: {
-              "x-api-key": process.env.X_API_KEY
-            }
-          }
+      const [cat, image] = await Promise.all([
+        fetchWithApiHeader(
+          `https://api.thecatapi.com/v1/breeds/search?q=${id}`
+        ),
+        fetchWithApiHeader(
+          `https://api.thecatapi.com/v1/images/search?breed_id=${id}`
         )
-      ).json();
-
-      console.log(cat, image);
+      ]);
 
       commit("setCat", cat.length ? { ...cat[0], image: image[0].url } : {});
     }
