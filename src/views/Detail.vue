@@ -2,13 +2,13 @@
   <div class="wrapper">
     <template v-if="cat">
       <cat-detail-card :cat="cat" v-if="hasInfo" />
-      <div v-else>
+      <div v-else data-test-id="no-info">
         <h1>
           Unfortunately, there is no information available for this breed.
         </h1>
       </div>
     </template>
-    <div v-else>
+    <div v-else data-test-id="loader">
       <h1>
         Loading...
       </h1>
