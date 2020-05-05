@@ -1,12 +1,7 @@
 <template>
-  <div>
+  <div class="wrapper">
     <template v-if="cat">
-      <template v-if="hasInfo">
-        <h1>{{ cat.name }}</h1>
-        <img src="" :alt="cat.name" />
-        <h3>Description</h3>
-        <p>{{ cat.description }}</p>
-      </template>
+      <cat-detail-card :cat="cat" v-if="hasInfo" />
       <div v-else>
         <h1>
           Unfortunately, there is no information available for this breed.
@@ -26,8 +21,12 @@
 
 <script>
 import { mapState } from "vuex";
+import CatDetailCard from "@/components/CatDetailCard";
 
 export default {
+  components: {
+    CatDetailCard
+  },
   computed: {
     ...mapState(["cat"]),
     hasInfo() {
@@ -41,15 +40,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  padding: 0 40px;
+  text-align: left;
+}
+
 .back {
   background-color: var(--color-primary);
   padding: 20px;
+  margin: auto;
   color: var(--color-gray-light);
   text-decoration: none;
   font-weight: bold;
   border-radius: 10px;
-  display: inline-block;
-  margin-top: 100px;
+  display: block;
+  width: fit-content;
+  transition: color 0.15s ease-out;
 
   &:hover {
     color: var(--color-light);
